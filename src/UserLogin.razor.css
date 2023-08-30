@@ -1,3 +1,9 @@
+section[data-authorized], section[data-authorized] * {
+    display: grid;
+    text-align: center;
+    place-content: center;
+}
+
 section[data-authorized=true] {
     position: fixed;
     width: 12rem;
@@ -16,6 +22,7 @@ section[data-authorized=true] {
             / min-content 1fr
     }
 }
+
 @media only screen and (max-aspect-ratio: 1) {
     section[data-authorized=true] {
         right: 1.5rem;
@@ -37,26 +44,28 @@ section[data-authorized=true] button {
     grid-area: name;
 }
 
-    section[data-authorized=true] form {
-        grid-area: menu;
-        height: 0;
-        opacity: 0;
-        transition: opacity ease-in-out 0.333s;
-        pointer-events: none;
-    }
+section[data-authorized=true] form {
+    grid-area: menu;
+    height: 0;
+    opacity: 0;
+    transition: opacity ease-in-out 0.333s;
+    pointer-events: none;
+}
 
-    section[data-authorized=true]:focus-within form {
-        opacity: 1;
-        height: 2rem;
-        pointer-events: initial;
-    }
+section[data-authorized=true]:focus-within form {
+    opacity: 1;
+    height: 2rem;
+    pointer-events: initial;
+}
 
 section[data-authorized=false] {
     position: absolute;
     inset: 0;
     place-content: center;
+    display: grid;
     grid-template-columns: max-content max-content;
 }
+
 section[data-authorized=false] img {
     height: 6rem;
 }
