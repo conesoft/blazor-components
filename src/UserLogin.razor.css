@@ -1,7 +1,20 @@
-section[data-authorized], section[data-authorized] * {
+::deep, ::deep * {
     display: grid;
     text-align: center;
-    place-content: center;
+    align-content: center;
+}
+
+input {
+    height: 2rem;
+}
+
+input[type=submit] {
+    background-color: #333;
+    transition: all 0.333s linear;
+}
+
+input[type=submit]:hover {
+    filter: invert();
 }
 
 section[data-authorized=true] {
