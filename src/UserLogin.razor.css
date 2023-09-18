@@ -61,7 +61,8 @@ section[data-authorized=true] form {
     grid-area: menu;
     height: 0;
     opacity: 0;
-    transition: opacity ease-in-out 0.333s;
+    transition: all ease-in-out 0.333s;
+    z-index: -1;
     pointer-events: none;
 }
 
