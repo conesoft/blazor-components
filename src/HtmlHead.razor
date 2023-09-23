@@ -2,22 +2,31 @@
 
 @inject HttpClient client
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
-    <link rel="manifest" href="/icons/site.webmanifest">
-    <meta name="theme-color" content="#000000" />
-    <meta property="og:image" content="/meta-image.jpg" />
-    <meta name="viewport" content="width=device-width; initial-scale=1; viewport-fit=cover">
-    <meta name="view-transition" content="same-origin" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.conesoft.net/style.css?v=@StyleMinVersion">
-    <link rel="stylesheet" type="text/css" href="@(AppDomain.CurrentDomain.FriendlyName).styles.css?v=23424" />
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+<link rel="manifest" href="/icons/site.webmanifest">
+<meta name="theme-color" content="#000000" />
+<meta property="og:image" content="/meta-image.jpg" />
+<meta name="viewport" content="width=device-width; initial-scale=1; viewport-fit=cover">
+<meta name="view-transition" content="same-origin" />
+<link rel="stylesheet" type="text/css" href="https://cdn.conesoft.net/style.css?v=@CdnStyleMinVersion">
+<link rel="stylesheet" type="text/css" href="@(AppDomain.CurrentDomain.FriendlyName).styles.css?v=@ScopedStyleVersion" />
 
 @code {
-    public string StyleMinVersion = "";
+    public string CdnStyleMinVersion = "";
+    public string ScopedStyleVersion = "";
 
     protected override async Task OnInitializedAsync()
     {
-        StyleMinVersion = (await client.GetStringAsync("https://cdn.conesoft.net/style.min.css.md5")).TrimEnd();
+        CdnStyleMinVersion = (await client.GetStringAsync("https://cdn.conesoft.net/style.min.css.md5")).TrimEnd();
+        if (File.Exists($"wwwroot/{AppDomain.CurrentDomain.FriendlyName}.styles.css"))
+        {
+            ScopedStyleVersion = new FileInfo($"wwwroot/{AppDomain.CurrentDomain.FriendlyName}.styles.css").LastWriteTimeUtc.Ticks.ToString();
+        }
+        else
+        {
+            ScopedStyleVersion = Random.Shared.Next().ToString();
+        }
     }
 }
