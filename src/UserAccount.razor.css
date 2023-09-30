@@ -8,69 +8,45 @@ input {
     height: 2rem;
 }
 
-input[type=submit] {
-    background-color: #333;
-    transition: all 0.333s linear;
-}
-
-input[type=submit]:hover {
-    filter: invert();
-}
-
 section {
     width: 12rem;
     z-index: 1;
-    background: #222;
-    box-shadow: 0 0 2rem black;
+    background: var(--background-color-80);
+    box-shadow: 0 0 2rem var(--background-color);
     position: relative;
+    grid-template:
+        "picture name"
+        "menu menu"
+        / min-content 1fr
 }
 
-@media only screen and (min-aspect-ratio: 1) {
-    section {
-/*        right: 1.5rem;
-        top: 1.5rem;
-        z-index: 2;
-*/        grid-template:
-            "picture name"
-            "menu menu"
-            / min-content 1fr
+    section img {
+        width: 2rem;
+        aspect-ratio: 1;
+        grid-area: picture;
     }
-}
 
-@media only screen and (max-aspect-ratio: 1) {
-    section {
-        right: 1.5rem;
-        bottom: 2.5rem;
-        grid-template:
-            "menu menu"
-            "picture name"
-            / min-content 1fr
+    section button {
+        grid-area: name;
     }
-}
 
-section img {
-    width: 2rem;
-    aspect-ratio: 1;
-    grid-area: picture;
-}
+    section form {
+        grid-area: menu;
+        height: 0;
+        opacity: 0;
+        transition: all ease-in-out 0.333s;
+        z-index: -1;
+        position: absolute;
+        width: 100%;
+        pointer-events: none;
+    }
 
-section button {
-    grid-area: name;
-}
+        section form input {
+            --button-color: var(--danger-color);
+        }
 
-section form {
-    grid-area: menu;
-    height: 0;
-    opacity: 0;
-    transition: all ease-in-out 0.333s;
-    z-index: -1;
-    position: absolute;
-    width: 100%;
-    pointer-events: none;
-}
-
-section:focus-within form {
-    opacity: 1;
-    height: 2rem;
-    pointer-events: initial;
-}
+    section:focus-within form {
+        opacity: 1;
+        height: 2rem;
+        pointer-events: initial;
+    }

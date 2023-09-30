@@ -1,18 +1,23 @@
 @using Microsoft.AspNetCore.Components.Authorization
 
+<header>
 <AuthorizeView>
     <Authorized>
-        <header>
             <nav class="@NavClass">
                 @ChildContent
             </nav>
             <UserAccount />
-        </header>
     </Authorized>
-</AuthorizeView>
-<UserLogin />
+    </AuthorizeView>
+</header>
+@if(NoUserLogin != true)
+{
+    <UserLogin />
+}
 
 @code {
+    [Parameter]
+    public bool? NoUserLogin { get; set; }
     [Parameter]
     public string NavClass { get; set; } = "";
     [Parameter]
