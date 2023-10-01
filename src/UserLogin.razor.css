@@ -13,6 +13,9 @@ section {
     inset: 0;
     place-content: center;
     display: grid;
+}
+
+form {
     grid-template-columns: max-content max-content;
 }
 

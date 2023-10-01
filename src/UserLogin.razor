@@ -3,12 +3,14 @@
 <AuthorizeView>
     <NotAuthorized>
         <section>
-            <img src="/user/--noname--.jpg" alt="profile picture" />
             <form action="/user/login" method="post">
-                <input type="text" name="username" placeholder="username">
-                <input type="password" name="password" placeholder="password">
-                <input type="hidden" name="redirectto" value="/">
-                <input type="submit" value="login">
+                <img src="/user/--noname--.jpg" alt="profile picture" />
+                <div>
+                    <input type="text" name="username" placeholder="username">
+                    <input type="password" name="password" placeholder="password">
+                    <input type="hidden" name="redirectto" value="/">
+                    <input type="submit" value="login">
+                </div>
             </form>
         </section>
     </NotAuthorized>
