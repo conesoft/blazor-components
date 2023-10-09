@@ -1,52 +1,89 @@
-::deep, ::deep * {
+#user-account-menu {
+    position: absolute;
+    --height: env(titlebar-area-height, 2rem);
+    width: 2rem;
+    right: calc(100% - env(titlebar-area-width, 100%) - env(titlebar-area-left, 0%));
+    transition: all 0.33s linear;
+}
+
+    #user-account-menu > button {
+        display: block;
+        left: auto;
+        right: 0;
+    }
+
+    #user-account-menu * {
+        app-region: no-drag;
+    }
+
+[popover] {
+    display: none;
+}
+
+[popover]:popover-open {
     display: grid;
-    text-align: center;
-    align-content: center;
+}
+
+button {
+    min-height: 0 !important;
+    font-size: calc(var(--height) / 2);
+    height: var(--height);
+    line-height: 1;
+    aspect-ratio: 1;
+    position: absolute;
+    right: 0;
+    transition: all 0.33s linear;
+}
+
+img {
+    height: var(--height);
+}
+
+
+menu {
+    left: auto;
+    right: calc(100% - env(titlebar-area-width, 100%) - env(titlebar-area-left, 0%));
+    background: transparent;
+    filter: drop-shadow(0 0 0.25rem black) drop-shadow(0 0 0.5rem black) drop-shadow(0 0 1rem black) drop-shadow(0 0 2rem black);
+    opacity: 0;
+    transition: all 0.33s linear, display 0.33s allow-discrete;
+}
+
+    menu:popover-open {
+        @starting-style {
+            opacity: 0;
+        }
+
+        opacity: 1;
+    }
+
+li {
+    background-color: var(--background-color-80);
+    height: var(--height);
+    font-size: calc(var(--height) / 2);
+    min-height: 0;
+    place-content: stretch;
+}
+
+    li:first-of-type {
+        margin-top: var(--height);
+    }
+
+a {
+    grid-auto-flow: column;
+    gap: calc(var(--height) / 2);
+    text-decoration: none;
+}
+
+span {
+    place-content: center;
+}
+
+li:has(img) {
+    padding-right: calc(var(--height) / 2);
 }
 
 input {
-    height: 2rem;
+    --button-color: var(--danger-color);
+    min-height: 0 !important;
 }
-
-section {
-    width: 12rem;
-    z-index: 1;
-    background: var(--background-color-80);
-    box-shadow: 0 0 2rem var(--background-color);
-    position: relative;
-    grid-template:
-        "picture name"
-        "menu menu"
-        / min-content 1fr
-}
-
-    section img {
-        width: 2rem;
-        aspect-ratio: 1;
-        grid-area: picture;
-    }
-
-    section button {
-        grid-area: name;
-    }
-
-    section form {
-        grid-area: menu;
-        height: 0;
-        opacity: 0;
-        transition: all ease-in-out 0.333s;
-        z-index: -1;
-        position: absolute;
-        width: 100%;
-        pointer-events: none;
-    }
-
-        section form input {
-            --button-color: var(--danger-color);
-        }
-
-    section:focus-within form {
-        opacity: 1;
-        height: 2rem;
-        pointer-events: initial;
-    }

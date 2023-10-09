@@ -1,14 +1,24 @@
-@using Microsoft.AspNetCore.Components.Authorization
+﻿@using Microsoft.AspNetCore.Components.Authorization
 
 <AuthorizeView>
     <Authorized>
-        <section class="user-account">
-            <img src="/user/@(context.User?.Identity?.Name).jpg?@Random.Shared.Next()" alt="profile picture" />
-            <button>@context.User?.Identity?.Name</button>
-            <form action="/user/logout" method="post">
-                <input type="hidden" name="redirectto" value="/">
-                <input type="submit" value="logout">
-            </form>
+        <section id='user-account-menu'>
+            <button popovertarget='user-account-menu-dropdown'>☰</button>
+            <menu id='user-account-menu-dropdown' popover>
+                <button popovertarget='user-account-menu-dropdown'>✕</button>
+                <li>
+                    <a href="https://conesoft.net" target="_blank">
+                        <img src="/user/@(context.User?.Identity?.Name).jpg?@Random.Shared.Next()" alt="profile picture" />
+                        <span>@context.User?.Identity?.Name</span>
+                    </a>
+                </li>
+                <li>
+                    <form action="/user/logout" method="post">
+                        <input type="hidden" name="redirectto" value="/">
+                        <input type="submit" value="logout">
+                    </form>
+                </li>
+            </menu>
         </section>
     </Authorized>
 </AuthorizeView>
