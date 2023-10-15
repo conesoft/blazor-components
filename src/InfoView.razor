@@ -1,23 +1,43 @@
-﻿<button popovertarget='user-account-info-view'>about</button>
-<dialog id='user-account-info-view' popover>
-    <article>
-        <header>
-            <nav>
-                <a class="active">⌂</a>
-                <a class="">@PageName</a>
-            </nav>
-        </header>
-        <img src="https://conesoft.net/user/davepermen.jpg" />
-        <section>
-            <p>written by <a href="https://davepermen.net">davepermen</a></p>
-            <p>a <a href="https://conesoft.net">conesoft product</a></p>
-            <p>running on <a href="https://get.dot.net">.NET @Environment.Version</a></p>
-            <p>&copy; @DateTime.Now.Year</p>
-        </section>
-    </article>
-</dialog>
+﻿@inject IJSRuntime runtime
+
+@if(Button)
+{
+    <button @onclick=@(async () => await ShowDialog("user-account-info-view"))>about</button>
+}
+else
+{
+    <dialog id="user-account-info-view" @onclick=@(async () => await ExitDialog("user-account-info-view"))>
+        <article>
+            <header>
+                <nav>
+                    <a class="active">⌂</a>
+                    <a class="">@PageName</a>
+                </nav>
+            </header>
+            <img src="https://conesoft.net/user/davepermen.jpg" />
+            <section>
+                <p>written by <a href="https://davepermen.net" target="_blank">davepermen</a></p>
+                <p>a <a href="https://conesoft.net" target="_blank">conesoft product</a></p>
+                <p>running on <a href="https://get.dot.net" target="_blank">.NET @Environment.Version</a></p>
+                <p>&copy; @DateTime.Now.Year</p>
+            </section>
+        </article>
+    </dialog>
+}
 
 @code {
     [Parameter]
+    public bool Button { get; set; } = false;
+    [Parameter]
     public string PageName { get; set; } = "";
+
+    public async Task ShowDialog(string id)
+    {
+        await runtime.InvokeVoidAsync($"{id}.showModal");
+    }
+
+    public async Task ExitDialog(string id)
+    {
+        await runtime.InvokeVoidAsync($"{id}.close");
+    }
 }

@@ -13,7 +13,7 @@
                     </a>
                 </li>
                 <li>
-                    <InfoView PageName="@PageName"/>
+                    <InfoView Button="true" PageName="@PageName"/>
                 </li>
                 <li>
                     <form action="/user/logout" method="post">
@@ -23,6 +23,7 @@
                 </li>
             </menu>
         </section>
+        <InfoView Button="false" PageName="@PageName" />
     </Authorized>
 </AuthorizeView>
 

@@ -2,6 +2,15 @@ dialog {
     width: max-content;
 }
 
+dialog:not([open]) {
+    display: none;
+}
+
+[open]::backdrop {
+    background-color: black;
+    opacity: 0.3;
+}
+
 header {
     padding: 1rem;
     place-items: center;
