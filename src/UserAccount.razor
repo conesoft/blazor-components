@@ -13,6 +13,9 @@
                     </a>
                 </li>
                 <li>
+                    <InfoView PageName="@PageName"/>
+                </li>
+                <li>
                     <form action="/user/logout" method="post">
                         <input type="hidden" name="redirectto" value="/">
                         <input type="submit" value="logout">
@@ -22,3 +25,8 @@
         </section>
     </Authorized>
 </AuthorizeView>
+
+@code {
+    [Parameter]
+    public string PageName { get; set; } = "";
+}

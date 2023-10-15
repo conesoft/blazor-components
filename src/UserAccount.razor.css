@@ -82,7 +82,7 @@ span {
     place-content: center;
 }
 
-li:has(img) {
+li:has(span) {
     padding-right: var(--half-height);
 }
 

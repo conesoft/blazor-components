@@ -1,0 +1,35 @@
+dialog {
+    width: max-content;
+}
+
+header {
+    padding: 1rem;
+    place-items: center;
+    grid-column: 1 / -1;
+}
+
+article {
+    grid-template-columns: auto auto;
+}
+
+article a {
+    color: var(--accent-color);
+}
+
+section {
+    background-color: var(--background-color-80);
+    padding: 1rem 2rem;
+}
+
+img {
+    max-height: 10rem;
+}
+
+p {
+    height: 2rem;
+    padding-block: 0.5rem;
+}
+
+p, p * {
+    display: inline;
+}
