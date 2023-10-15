@@ -1,7 +1,8 @@
 #user-account-menu {
     position: absolute;
-    --height: env(titlebar-area-height, 2rem);
-    width: 2rem;
+    --height: max(env(titlebar-area-height, 2rem), 2rem);
+    --half-height: calc(var(--height) / 2);
+    width: var(--height);
     right: calc(100% - env(titlebar-area-width, 100%) - env(titlebar-area-left, 0%));
     transition: all 0.33s linear;
 }
@@ -26,7 +27,7 @@
 
 button {
     min-height: 0 !important;
-    font-size: calc(var(--height) / 2);
+    font-size: var(--half-height);
     height: var(--height);
     line-height: 1;
     aspect-ratio: 1;
@@ -37,6 +38,8 @@ button {
 
 img {
     height: var(--height);
+    width: var(--height);
+    object-fit: cover;
 }
 
 
@@ -60,7 +63,7 @@ menu {
 li {
     background-color: var(--background-color-80);
     height: var(--height);
-    font-size: calc(var(--height) / 2);
+    font-size: var(--half-height);
     min-height: 0;
     place-content: stretch;
 }
@@ -71,7 +74,7 @@ li {
 
 a {
     grid-auto-flow: column;
-    gap: calc(var(--height) / 2);
+    gap: var(--half-height);
     text-decoration: none;
 }
 
@@ -80,7 +83,7 @@ span {
 }
 
 li:has(img) {
-    padding-right: calc(var(--height) / 2);
+    padding-right: var(--half-height);
 }
 
 input {

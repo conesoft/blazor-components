@@ -6,6 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<AssemblyName>Conesoft.Blazor.Components</AssemblyName>
 		<RootNamespace>Conesoft.Blazor.Components</RootNamespace>
+		<UseRazorSourceGenerator>false</UseRazorSourceGenerator>
 	</PropertyGroup>
 
 

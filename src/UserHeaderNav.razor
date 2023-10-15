@@ -1,11 +1,11 @@
 @using Microsoft.AspNetCore.Components.Authorization
 
 <header>
+    <nav class="@NavClass">
+        @ChildContent
+    </nav>
     <AuthorizeView>
         <Authorized>
-            <nav class="@NavClass">
-                @ChildContent
-            </nav>
             <UserAccount />
         </Authorized>
     </AuthorizeView>
