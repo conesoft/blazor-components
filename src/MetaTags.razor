@@ -1,0 +1,15 @@
+﻿<meta name="title" content="@Title" />
+<meta name="description" content="@Description" />
+
+<OpenGraphMeta Title="@Title" Description="@Description" Url="@Url" Image="@Image" />
+
+@code {
+    [Parameter]
+    public string Title { get; set; } = "";
+    [Parameter]
+    public string Description { get; set; } = "";
+    [Parameter]
+    public string Url { get; set; } = "";
+    [Parameter]
+    public string Image { get; set; } = "";
+}

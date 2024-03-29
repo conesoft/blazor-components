@@ -1,0 +1,16 @@
+﻿    <meta property="og:type" content="website">
+    <meta property="og:title" content="@Title">
+    <meta property="og:description" content="@Description">
+    <meta property="og:image" content="@($"{Url}{Image}")">
+
+
+@code {
+    [Parameter]
+    public string Title { get; set; } = "";
+    [Parameter]
+    public string Description { get; set; } = "";
+    [Parameter]
+    public string Url { get; set; } = "";
+    [Parameter]
+    public string Image { get; set; } = "";
+}
