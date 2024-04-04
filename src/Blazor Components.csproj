@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
@@ -6,7 +6,6 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<AssemblyName>Conesoft.Blazor.Components</AssemblyName>
 		<RootNamespace>Conesoft.Blazor.Components</RootNamespace>
-		<UseRazorSourceGenerator>false</UseRazorSourceGenerator>
 	</PropertyGroup>
 
 
@@ -15,12 +14,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.2" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.2" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="wwwroot\" />
+		<PackageReference Include="Blazored.Video" Version="1.0.1" />
+		<PackageReference Include="Conesoft.Files" Version="1.8.2" />
+		<PackageReference Include="Humanizer.Core" Version="2.14.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>

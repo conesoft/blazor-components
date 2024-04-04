@@ -19,7 +19,14 @@
 
     protected override async Task OnInitializedAsync()
     {
-        CdnStyleMinVersion = (await client.GetStringAsync("https://cdn.conesoft.net/style.min.css.md5")).TrimEnd();
+        try
+        {
+            var cts = new CancellationTokenSource(1000);
+            CdnStyleMinVersion = (await client.GetStringAsync("https://cdn.conesoft.net/style.min.css.md5", cts.Token)).TrimEnd();
+        }
+        catch
+        {
+        }
         if (File.Exists($"wwwroot/{AppDomain.CurrentDomain.FriendlyName}.styles.css"))
         {
             ScopedStyleVersion = new FileInfo($"wwwroot/{AppDomain.CurrentDomain.FriendlyName}.styles.css").LastWriteTimeUtc.Ticks.ToString();

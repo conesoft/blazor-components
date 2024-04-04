@@ -1,0 +1,35 @@
+﻿@inject IJSRuntime JsRuntime
+
+@code {
+    [Parameter] public Conesoft.Files.Directory Current { get; set; } = Conesoft.Files.Directory.Invalid;
+    [Parameter] public string Path { get; set; } = "";
+
+    private string CurrentPath => $"{Path}/{Current.Name}";
+    private string CurrentPathForDownload => $"*/{(CurrentPath.StartsWith("/") ? CurrentPath[1..] : CurrentPath)}";
+}
+
+<li>
+    <section>
+        <img src="/folder-icon.svg" />
+        <a href="https://files.conesoft.net/@CurrentPath">@Current.Name</a>
+    </section>
+     <menu>
+        <li>
+            download <a href="https://files.conesoft.net/@CurrentPathForDownload" download="">▼</a>
+        </li>
+        <li dangerous>
+            delete <a @onclick="@DeleteFolder" @onclick:preventDefault=true @onclick:stopPropagation=true>✕</a>
+        </li>
+    </menu>
+</li>
+
+@code {
+    public async Task DeleteFolder()
+    {
+        bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", $"Are you sure?\n{Current.Path}");
+        if (confirmed)
+        {
+            Current.Delete();
+        }
+    }
+}
