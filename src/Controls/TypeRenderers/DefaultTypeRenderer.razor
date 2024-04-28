@@ -1,9 +1,0 @@
-﻿@using FileRenderers
-
-@code {
-    [Parameter] public Conesoft.Files.File Current { get; set; } = Conesoft.Files.Directory.Invalid.AsFile;
-    [Parameter] public string Path { get; set; } = "";
-
-    public virtual string[] Extensions => [];
-}
-<DefaultFileRenderer Path="@Path" Current="@Current"></DefaultFileRenderer>
