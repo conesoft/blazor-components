@@ -7,13 +7,11 @@
             <menu id='user-account-menu-dropdown' popover>
                 <button popovertarget='user-account-menu-dropdown'>✕</button>
                 <li>
-                    <a href="https://conesoft.net" target="_blank">
-                        <img src="/user/@(context.User?.Identity?.Name).jpg?@Random.Shared.Next()" alt="profile picture" />
-                        <span>@context.User?.Identity?.Name</span>
-                    </a>
+                    <img src="/user/@(context.User?.Identity?.Name).jpg?@Random.Shared.Next()" alt="profile picture" />
+                    <a href="https://conesoft.net" target="_blank">@context.User?.Identity?.Name</a>
                 </li>
                 <li>
-                    <InfoView Button="true" PageName="@PageName"/>
+                    <InfoView Button="true" PageName="@PageName" />
                 </li>
                 <li>
                     <form action="/user/logout" method="post">

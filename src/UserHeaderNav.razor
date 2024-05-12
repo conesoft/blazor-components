@@ -1,8 +1,9 @@
 @using Microsoft.AspNetCore.Components.Authorization
 
 <header>
+    <NavLink Match=NavLinkMatch.All href="/">@HomeButtonContent</NavLink>
     <nav class="@NavClass">
-        @ChildContent
+        @NavContent
     </nav>
     <AuthorizeView>
         <Authorized>
@@ -19,9 +20,11 @@
     [Parameter]
     public bool? NoUserLogin { get; set; }
     [Parameter]
-    public string NavClass { get; set; } = "";
+    public string? NavClass { get; set; } = null;
     [Parameter]
     public string PageName { get; set; } = "";
     [Parameter]
-    public RenderFragment? ChildContent { get; set; }
+    public RenderFragment? HomeButtonContent { get; set; }
+    [Parameter]
+    public RenderFragment? NavContent { get; set; }
 }

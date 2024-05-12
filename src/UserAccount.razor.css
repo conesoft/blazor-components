@@ -65,28 +65,27 @@ li {
     height: var(--height);
     font-size: var(--half-height);
     min-height: 0;
+    display: grid;
+    gap: 1rem;
     place-content: stretch;
+    place-items: stretch;
+    grid-auto-flow: column;
+    overflow-x: hidden;
+}
+
+li * {
+    display: grid;
+    place-items: stretch;
+    place-self: stretch;
+    place-content: stretch;
+    text-align: center;
 }
 
     li:first-of-type {
         margin-top: var(--height);
+        padding-right: var(--half-height);
     }
-
-a {
-    grid-auto-flow: column;
-    gap: var(--half-height);
-    text-decoration: none;
-}
-
-span {
-    place-content: center;
-}
-
-li:has(span) {
-    padding-right: var(--half-height);
-}
 
 input {
     --button-color: var(--danger-color);
-    min-height: 0 !important;
 }
