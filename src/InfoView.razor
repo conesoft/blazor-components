@@ -12,7 +12,7 @@ else
         <article>
             <img src="https://conesoft.net/user/davepermen.jpg" />
             <ul>
-                <li>⌂ @System.Reflection.Assembly.GetEntryAssembly().GetName().Name.Split('-').Last().Trim()</li>
+                <li>⌂ @(System.Reflection.Assembly.GetEntryAssembly()?.GetName()?.Name?.Split('-').Last().Trim() ?? "")</li>
                 <li>written by <a href="https://davepermen.net" target="_blank">davepermen</a></li>
                 <li>a <a href="https://conesoft.net" target="_blank">conesoft product</a></li>
                 <li>app hash is <aside>@abh.CompiledHash</aside></li>
