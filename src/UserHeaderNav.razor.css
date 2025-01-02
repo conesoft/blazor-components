@@ -1,0 +1,8 @@
+hgroup {
+    display: flex;
+    gap: 0.5rem;
+}
+
+::deep a {
+    background: var(--background-color);
+}

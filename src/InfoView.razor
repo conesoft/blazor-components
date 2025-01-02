@@ -1,4 +1,5 @@
 ﻿@using Microsoft.JSInterop
+@inject Conesoft.Hosting.ApplicationBuildHash abh
 @inject IJSRuntime runtime
 
 @if(Button)
@@ -9,19 +10,16 @@ else
 {
     <dialog id="user-account-info-view" @onclick=@(async () => await ExitDialog("user-account-info-view"))>
         <article>
-            <header>
-                <nav>
-                    <a class="active">⌂</a>
-                    <a class="">@PageName</a>
-                </nav>
-            </header>
             <img src="https://conesoft.net/user/davepermen.jpg" />
-            <section>
-                <p>written by <a href="https://davepermen.net" target="_blank">davepermen</a></p>
-                <p>a <a href="https://conesoft.net" target="_blank">conesoft product</a></p>
-                <p>running on <a href="https://get.dot.net" target="_blank">.NET @Environment.Version</a></p>
-                <p>&copy; @DateTime.Now.Year</p>
-            </section>
+            <ul>
+                <li>⌂ @System.Reflection.Assembly.GetEntryAssembly().GetName().Name.Split('-').Last().Trim()</li>
+                <li>written by <a href="https://davepermen.net" target="_blank">davepermen</a></li>
+                <li>a <a href="https://conesoft.net" target="_blank">conesoft product</a></li>
+                <li>app hash is <aside>@abh.CompiledHash</aside></li>
+                <li>app logs <a href="https://files.conesoft.net/logs">here</a></li>
+                <li>running on <a href="https://get.dot.net" target="_blank">.NET @Environment.Version</a></li>
+                <li>&copy; <aside>@DateTime.Now.Year</aside></li>
+            </ul>
         </article>
     </dialog>
 }

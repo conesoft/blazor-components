@@ -1,5 +1,9 @@
 dialog {
     width: max-content;
+    max-width: 100%;
+    place-self: center;
+    box-shadow: 0 1rem 5rem black;
+    overflow: hidden;
 }
 
 dialog:not([open]) {
@@ -7,38 +11,49 @@ dialog:not([open]) {
 }
 
 [open]::backdrop {
-    background-color: black;
-    opacity: 0.3;
-}
-
-header {
-    padding: 1rem;
-    place-items: center;
-    grid-column: 1 / -1;
+    background-color: var(--accent-color);
+    backdrop-filter: blur(1rem);
+    opacity: 0.1;
 }
 
 article {
     grid-template-columns: auto auto;
+    font-size: 1rem;
+    display: grid;
+    gap: 1rem;
+    padding: 2rem;
+    background: black;
+}
+@media (aspect-ratio < 1) {
+    article {
+        grid-template-columns: auto;
+    }
 }
 
-article a {
+
+a, aside {
     color: var(--accent-color);
-}
-
-section {
-    background-color: var(--background-color-80);
-    padding: 1rem 2rem;
 }
 
 img {
     max-height: 10rem;
+    place-content: center;
 }
 
-p {
+li {
     height: 2rem;
-    padding-block: 0.5rem;
+    display: block;
+    background: black;
 }
 
-p, p * {
-    display: inline;
+    li:first-of-type {
+        font-size: 1.5rem;
+        margin-block-end: 1rem;
+        text-wrap: nowrap;
+    }
+
+li:hover, li:focus-within {
+    box-shadow: none;
+    scale: 1;
+    z-index: 0;
 }
