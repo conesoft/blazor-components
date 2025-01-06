@@ -5,9 +5,16 @@
 <meta charset="utf-8" />
 <base href="/" />
 
-<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
+@if (FaviconIsSvg)
+{
+    <link rel="icon" type="image/svg" sizes="32x32" href="/meta/favicon.svg?dark" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/svg" sizes="32x32" href="/meta/favicon.svg?light" media="(prefers-color-scheme: light)" />
+}
+else
+{
+    <link rel="icon" type="image/png" sizes="512x512" href="/meta/favicon.png" />
+}
 <link rel="manifest" href="/pwa/site.webmanifest" />
-<link rel="shortcut icon" href="/icons/favicon.ico" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 @if (string.IsNullOrWhiteSpace(Cdn) == false)
@@ -16,9 +23,19 @@
 }
 <link rel="stylesheet" type="text/css" href="@(AppDomain.CurrentDomain.FriendlyName).styles.css?v=@ScopedStyleVersion" />
 
+@if(ForceRefresh)
+{
+    <style>html { background: black !important; color: black !important; } html * { display: none !important }</style>
+    <meta http-equiv="refresh" content="0" />
+}
+
 @code {
-    public string CdnStyleMinVersion = "";
-    public string ScopedStyleVersion = "";
+    string CdnStyleMinVersion = "";
+    string ScopedStyleVersion = "";
+
+    bool FaviconIsSvg = false;
+    bool ForceRefresh = false;
+
 
     [Parameter]
     public string Cdn { get; set; } = "style";
@@ -29,11 +46,12 @@
         {
             try
             {
-                var cts = new CancellationTokenSource(1000);
+                var cts = new CancellationTokenSource(100);
                 CdnStyleMinVersion = (await client.GetStringAsync($"https://cdn.conesoft.net/{Cdn}.min.css.md5", cts.Token)).TrimEnd();
             }
             catch
             {
+                ForceRefresh = true;
             }
         }
         if (File.Exists($"wwwroot/{AppDomain.CurrentDomain.FriendlyName}.styles.css"))
@@ -44,5 +62,6 @@
         {
             ScopedStyleVersion = Random.Shared.Next().ToString();
         }
+        FaviconIsSvg = File.Exists($"wwwroot/icons/favicon.svg");
     }
 }
