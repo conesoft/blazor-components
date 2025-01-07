@@ -8,18 +8,23 @@
     <nav>
         @NavContent
     </nav>
-    <AuthorizeView>
-        <Authorized>
-            <UserAccount PageName="@PageName" />
-        </Authorized>
-    </AuthorizeView>
+    @if (NoAuthorization != true)
+    {
+        <AuthorizeView>
+            <Authorized>
+                <UserAccount PageName="@PageName" />
+            </Authorized>
+        </AuthorizeView>
+    }
 </header>
-@if (NoUserLogin != true)
+@if (NoAuthorization != true && NoUserLogin != true)
 {
     <UserLogin />
 }
 
 @code {
+    [Parameter]
+    public bool? NoAuthorization { get; set; }
     [Parameter]
     public bool? NoUserLogin { get; set; }
     [Parameter]
