@@ -61,7 +61,7 @@ menu {
     }
 
 li {
-    background-color: var(--background-color-80);
+    background-color: var(--background-color);
     height: var(--height);
     font-size: var(--half-height);
     min-height: 0;
