@@ -4,26 +4,27 @@
     }
 </style>
 
+@* <script src="_framework/blazor.web.js"></script> *@
 <script src="_framework/blazor.web.js" autostart="false"></script>
 <script>
-    // function delay(milliseconds) {
-    //     return new Promise(resolve => {
-    //         setTimeout(resolve, milliseconds);
-    //     });
-    // }
+    function delay(milliseconds) {
+        return new Promise(resolve => {
+            setTimeout(resolve, milliseconds);
+        });
+    }
 
     async function boot() {
         await Blazor.start({
-            //ssr: { disableDomPreservation: true }
+            ssr: { disableDomPreservation: true }
         })
 
-        // while (Blazor.defaultReconnectionHandler === undefined) {
-        //     await delay(100);
-        // }
-        // console.log("Blazor.defaultReconnectionHandler active, setting up reconnection reloader")
-        // Blazor.defaultReconnectionHandler._reconnectCallback = function (d) {
-        //     document.location.reload()
-        // }
+        while (Blazor.defaultReconnectionHandler === undefined) {
+            await delay(100);
+        }
+        console.log("Blazor.defaultReconnectionHandler active, setting up reconnection reloader")
+        Blazor.defaultReconnectionHandler._reconnectCallback = function (d) {
+            document.location.reload()
+        }
     }
 
     boot()

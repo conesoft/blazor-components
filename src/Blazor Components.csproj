@@ -10,8 +10,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="Blazored.Video" Version="1.0.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Components" Label="Used only to fix Security Issue in Blazored.Video" Version="[6.0.25]" />
-		<PackageReference Include="Conesoft.Hosting" Version="3.4.0" />
+		<PackageReference Include="Conesoft.Hosting" Version="3.4.10" />
+		<PackageReference Include="Toolbelt.Blazor.ViewTransition" Version="1.0.3" />
 	</ItemGroup>
 
 </Project>

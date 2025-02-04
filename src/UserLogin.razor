@@ -3,15 +3,19 @@
 <AuthorizeView>
     <NotAuthorized>
         <section>
-            <form action="/user/login" method="post">
-                <img src="/user/--noname--.jpg" alt="profile picture" />
-                <div>
-                    <input type="text" name="username" placeholder="username">
-                    <input type="password" name="password" placeholder="password">
-                    <input type="hidden" name="redirectto" value="/">
-                    <input type="submit" value="login">
-                </div>
-            </form>
+            <ul>
+                <li>
+                    <form action="/user/login" method="post">
+                        <img src="/user/--noname--.jpg" alt="profile picture" />
+                        <div>
+                            <input type="text" name="username" placeholder="username">
+                            <input type="password" name="password" placeholder="password">
+                            <input type="hidden" name="redirectto" value="/">
+                            <input type="submit" value="login">
+                        </div>
+                    </form>
+                </li>
+            </ul>
         </section>
     </NotAuthorized>
 </AuthorizeView>

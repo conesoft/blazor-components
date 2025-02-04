@@ -1,11 +1,19 @@
-@using Microsoft.AspNetCore.Components.Authorization
+﻿@using Microsoft.AspNetCore.Components.Authorization
 
 <header class="@NavClass">
     <hgroup>
-        <NavLink Match=NavLinkMatch.All href="/">@HomeButtonContent</NavLink>
+        @if (HomeButtonContent != null)
+        {
+            <NavLink Match=NavLinkMatch.All href="/">@HomeButtonContent</NavLink>
+        }
+        else
+        {
+            <NavLink Match=NavLinkMatch.All href="/">⌂</NavLink>
+        }
         @HomeButtonExtraContent
     </hgroup>
     <nav>
+        @ChildContent
         @NavContent
     </nav>
     @if (NoAuthorization != true)
@@ -35,6 +43,9 @@
     public RenderFragment? HomeButtonContent { get; set; }
     [Parameter]
     public RenderFragment? HomeButtonExtraContent { get; set; }
+    [Obsolete]
     [Parameter]
     public RenderFragment? NavContent { get; set; }
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
 }

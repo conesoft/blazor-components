@@ -16,6 +16,10 @@ section {
     z-index: 1;
 }
 
+ul {
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+}
+
 form {
     grid-template-columns: max-content max-content;
 }
