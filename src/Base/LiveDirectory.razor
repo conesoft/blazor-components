@@ -1,0 +1,26 @@
+﻿@using Conesoft.Files
+
+@inherits ComponentWithCancellation
+
+@ChildContent.Invoke(Directory)
+
+@code {
+    [Parameter]
+    public Directory Directory { get; set; } = default!;
+
+    [Parameter]
+    public bool AllDirectories { get; set; } = false;
+
+    [Parameter]
+    public RenderFragment<Directory> ChildContent { get; set; } = default!;
+
+    public delegate Task OnLiveDelegate(Directory directory);
+    [Parameter]
+    public OnLiveDelegate? OnLive { get; set; }
+
+    protected override void OnParametersSet() => Directory.Live(() =>
+    {
+        InvokeAsync(StateHasChanged);
+        OnLive?.Invoke(Directory);
+    }, all: AllDirectories, previous: CancellationTokenSource);
+}

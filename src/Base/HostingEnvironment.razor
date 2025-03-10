@@ -1,0 +1,10 @@
+﻿@using Conesoft.Hosting
+
+@inject HostEnvironment environment
+
+@ChildContent.Invoke(environment)
+
+@code {
+    [Parameter]
+    public RenderFragment<HostEnvironment> ChildContent { get; set; } = default!;
+}

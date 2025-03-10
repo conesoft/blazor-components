@@ -1,0 +1,23 @@
+﻿@using Conesoft.Files
+
+@inherits ComponentWithCancellation
+
+@ChildContent.Invoke(File)
+
+@code {
+    [Parameter]
+    public File File { get; set; } = default!;
+
+    [Parameter]
+    public RenderFragment<File> ChildContent { get; set; } = default!;
+
+    public delegate Task OnLiveDelegate(File file);
+    [Parameter]
+    public OnLiveDelegate? OnLive { get; set; }
+
+    protected override void OnParametersSet() => File.Live(() =>
+    {
+        InvokeAsync(StateHasChanged);
+        OnLive?.Invoke(File);
+    }, previous: CancellationTokenSource);
+}
