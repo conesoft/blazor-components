@@ -22,5 +22,5 @@
     {
         InvokeAsync(StateHasChanged);
         OnLive?.Invoke(Directory);
-    }, all: AllDirectories, previous: CancellationTokenSource);
+    }, cancellation: CancellationTokenSource.Token, all: AllDirectories);
 }

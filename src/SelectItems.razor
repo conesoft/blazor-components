@@ -1,0 +1,62 @@
+<section>
+    @if (NotSelectedItems().Any())
+    {
+        <select @bind="@currentIndex" @bind:after="@AddItem">
+            <option selected hidden disabled value="-1"></option>
+            @foreach (var item in NotSelectedItems())
+            {
+                <option value="@item.Index">@item.Item</option>
+            }
+        </select>
+    }
+    @if (SelectedItems().Any() == false)
+    {
+        <span>@Placeholder</span>
+    }
+    <ul>
+        @foreach (var item in SelectedItems())
+        {
+            <li><button @onclick=@(() => RemoveItem(item.Index))>@item.Item</button></li>
+        }
+    </ul>
+</section>
+
+@code {
+    [Parameter]
+    public string[] Items { get; set; } = [];
+
+    [Parameter]
+    public string Placeholder { get; set; } = "select items";
+
+    [Parameter]
+    public string[] Selected { get; set; } = [];
+
+    [Parameter]
+    public EventCallback<string[]> SelectedChanged { get; set; }
+
+    HashSet<int> indicees = [];
+    int currentIndex = -1;
+
+    IEnumerable<(int Index, string Item)> SelectedItems() => Items.Index().Where(t => indicees.Contains(t.Index));
+    IEnumerable<(int Index, string Item)> NotSelectedItems() => Items.Index().Where(t => indicees.Contains(t.Index) == false);
+
+    override protected void OnParametersSet()
+    {
+        indicees = [.. Selected.Select(selected => Array.IndexOf(Items, selected)).Where(index => index >= 0)];
+        StateHasChanged();
+    }
+
+    async Task AddItem()
+    {
+        indicees.Add(currentIndex);
+        currentIndex = -1;
+        await SelectedChanged.InvokeAsync(SelectedItems().Select(item => item.Item).ToArray());
+    }
+
+    async Task RemoveItem(int index)
+    {
+        indicees.Remove(index);
+        currentIndex = -1;
+        await SelectedChanged.InvokeAsync(SelectedItems().Select(item => item.Item).ToArray());
+    }
+}

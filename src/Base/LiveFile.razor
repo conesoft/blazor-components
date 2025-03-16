@@ -19,5 +19,5 @@
     {
         InvokeAsync(StateHasChanged);
         OnLive?.Invoke(File);
-    }, previous: CancellationTokenSource);
+    }, cancellation: CancellationTokenSource.Token);
 }
