@@ -1,25 +1,32 @@
-﻿<section inert="@disabled">
-    <input type="text" placeholder="@Placeholder" @bind="@selected" @bind:event="oninput" @onkeydown=@KeyDown />
-    <button @onclick=@Clicked>＋</button>
+﻿<section>
+    <input inert="@disabled" type="text" placeholder="@Placeholder" @bind="@text" @bind:event="oninput" @onkeydown=@KeyDown />
+    <button inert="@disabled" @onclick=@Clicked>＋</button>
+    <button cancel @onclick=@Cancelled>×</button>
 </section>
 
 @code {
     [Parameter]
     public string Placeholder { get; set; } = "enter text";
 
-    string selected = "";
+    string text = "";
     bool disabled = false;
+    CancellationTokenSource? cts;
 
     [Parameter]
-    public EventCallback<string> TextChanged { get; set; }
+    public EventCallback<AddTextArgs> TextChanged { get; set; }
 
     async Task Clicked()
     {
         disabled = true;
         StateHasChanged();
-        await TextChanged.InvokeAsync(selected);
+        cts = new();
+        await TextChanged.InvokeAsync(new(text, cts.Token));
+        cts.Dispose();
+        cts = null;
         disabled = false;
     }
+
+    Task Cancelled() => cts?.CancelAsync() ?? Task.CompletedTask;
 
     async Task KeyDown(KeyboardEventArgs eventArgs)
     {
@@ -28,4 +35,6 @@
             await Clicked();
         }
     }
+
+    public record AddTextArgs(string Value, CancellationToken Cancellation);
 }

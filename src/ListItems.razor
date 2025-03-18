@@ -1,0 +1,36 @@
+@typeparam T
+
+@if(Items?.Count > 0)
+{
+    <ul @attributes="InputAttributes">
+        @foreach(var item in Items)
+        {
+            <li>@ItemContent?.Invoke(item)</li>
+        }
+    </ul>
+}
+else if(Items != null)
+{
+    @EmptyContent
+}
+else
+{
+    @NullContent
+}
+
+@code {
+    [Parameter]
+    public ICollection<T>? Items { get; set; }
+
+    [Parameter]
+    public RenderFragment<T>? ItemContent { get; set; } = default!;
+
+    [Parameter]
+    public RenderFragment? EmptyContent { get; set; } = default!;
+
+    [Parameter]
+    public RenderFragment? NullContent { get; set; } = default!;
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object>? InputAttributes { get; set; } = default!;
+}
