@@ -1,0 +1,19 @@
+﻿section {
+    display: grid !important;
+    grid-template-areas: "all";
+    height: 2rem;
+    padding-inline: 0 !important
+}
+
+    section > * {
+        grid-area: all
+    }
+
+    button {
+        aspect-ratio: 1;
+        place-self: stretch end;
+    }
+
+    [inert] button {
+        opacity: 0;
+    }

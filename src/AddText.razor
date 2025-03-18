@@ -1,0 +1,31 @@
+﻿<section inert="@disabled">
+    <input type="text" placeholder="@Placeholder" @bind="@selected" @bind:event="oninput" @onkeydown=@KeyDown />
+    <button @onclick=@Clicked>＋</button>
+</section>
+
+@code {
+    [Parameter]
+    public string Placeholder { get; set; } = "enter text";
+
+    string selected = "";
+    bool disabled = false;
+
+    [Parameter]
+    public EventCallback<string> TextChanged { get; set; }
+
+    async Task Clicked()
+    {
+        disabled = true;
+        StateHasChanged();
+        await TextChanged.InvokeAsync(selected);
+        disabled = false;
+    }
+
+    async Task KeyDown(KeyboardEventArgs eventArgs)
+    {
+        if (eventArgs.Code == "Enter" || eventArgs.Code == "NumpadEnter")
+        {
+            await Clicked();
+        }
+    }
+}
