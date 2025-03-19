@@ -1,38 +1,46 @@
-﻿section {
+﻿section.addtext-control {
     display: grid !important;
     grid-template-areas: "all";
     height: 2rem;
     padding-inline: 0 !important
 }
 
-    section > * {
+    section.addtext-control > * {
         grid-area: all
     }
 
-button {
+    .addtext-control input {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-inline-start: 0.5rem;
+        padding-inline-end: 1.5rem;
+        width: 100%
+    }
+
+.addtext-control button {
     aspect-ratio: 1;
     place-self: stretch end;
     background-color: transparent;
     box-shadow: none;
 }
 
-button:hover {
+.addtext-control button:hover {
     background-color: var(--accent-color);
     color: var(--color);
 }
 
-:has(button:hover) input {
+.addtext-control:has(button:hover) input {
     background-color: var(--background-color-80);
     border: 0.25rem solid var(--accent-color);
     box-shadow: inset 0 0 1rem var(--button-color), 0 0 1rem var(--button-color), inset -3rem 0 1rem -1rem var(--button-color);
 }
 
-:not(:has([inert])) button[cancel] {
+.addtext-control:not(:has([inert])) button[cancel] {
     opacity: 0;
     display: none;
 }
 
-:has([inert]) button:not([cancel]) {
+.addtext-control:has([inert]) button:not([cancel]) {
     opacity: 0;
     display: none;
-}
+}   
