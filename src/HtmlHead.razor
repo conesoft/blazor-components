@@ -1,7 +1,11 @@
 @using System.Net.Http
 @using System.Text.Encodings.Web
+@using Conesoft.Files
+@using Conesoft.Hosting
 
 @inject HttpClient client
+@inject HostEnvironment environment
+
 
 <meta charset="utf-8" />
 <base href="/" />
@@ -9,10 +13,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 @if (string.IsNullOrWhiteSpace(Stylesheet) == false)
 {
-    var domain = LocalStylesheet ? "" : "https://cdn.conesoft.net";
+    var domain = LocalStylesheet ? "" : "https://content.conesoft.net";
     <link rel="stylesheet" type="text/css" href="@(domain)/@(Stylesheet).css?v=@CdnStyleMinVersion" />
 }
 <link rel="stylesheet" type="text/css" href="@Assets[$"{UrlEncoder.Default.Encode(AppDomain.CurrentDomain.FriendlyName)}.styles.css"]" />
+
+<AuthorizeView>
+    <Authorized>
+        <style>
+            html {
+                --accent-color: oklch(0.87 0.20 @(int.Parse((environment.Global.Storage / "users" / context.User.Identity!.Name! / Filename.From("color", "txt")).Now.ReadText() ?? "157"))deg)
+            }
+        </style>
+    </Authorized>
+</AuthorizeView>
 
 @if (ForceRefresh)
 {
@@ -47,7 +61,7 @@
             try
             {
                 var cts = new CancellationTokenSource(100);
-                CdnStyleMinVersion = (await client.GetStringAsync($"https://cdn.conesoft.net/{Stylesheet}.css.md5", cts.Token)).TrimEnd();
+                CdnStyleMinVersion = (await client.GetStringAsync($"https://content.conesoft.net/{Stylesheet}.css.md5", cts.Token)).TrimEnd();
             }
             catch
             {
@@ -58,7 +72,7 @@
         {
             CdnStyleMinVersion = new FileInfo($"wwwroot/{Stylesheet}.css").LastWriteTimeUtc.Ticks.ToString();
         }
-        if (File.Exists($"wwwroot/{UrlEncoder.Default.Encode(AppDomain.CurrentDomain.FriendlyName)}.styles.css"))
+        if (System.IO.File.Exists($"wwwroot/{UrlEncoder.Default.Encode(AppDomain.CurrentDomain.FriendlyName)}.styles.css"))
         {
             ScopedStyleVersion = new FileInfo($"wwwroot/{UrlEncoder.Default.Encode(AppDomain.CurrentDomain.FriendlyName)}.styles.css").LastWriteTimeUtc.Ticks.ToString();
         }

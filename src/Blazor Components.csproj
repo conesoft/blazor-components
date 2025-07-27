@@ -10,7 +10,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Blazored.Video" Version="1.0.1" />
-		<PackageReference Include="Conesoft.Hosting" Version="3.6.1" />
+		<PackageReference Include="Conesoft.Hosting" Version="3.7.4" />
 		<PackageReference Include="Toolbelt.Blazor.ViewTransition" Version="1.0.4" />
 	</ItemGroup>
 
